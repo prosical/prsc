@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<!--
+	Aerial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+
+	<style type="text/text/css">
+	@@font-face {
+		font-family: 'naBrush';
+		src:url("NanumBrush.woff");
+	}
+	</style>
+
+
+
+
+	<title>Aerial by HTML5 UP</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+  <!-- bootstrap.js -->
+  <script src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body class="is-preload">
+	<div id="wrapper">
+		<div id="bg"></div>
+		<div id="overlay"></div>
+		<div id="main">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="container">
+
+				</div>
+				<h1><p style="font-family:naBrush;">Weather Scanner</p></h1>
+				<p>Security Chief &nbsp;&bull;&nbsp; Cyborg &nbsp;&bull;&nbsp; Never asked for this</p>
+
+<!---------------------------------------------->
+
+<div class="welcome-hero-serch-box">
+
+	<div class="welcome-hero-form" id="frm">
+		<div class="single-welcome-hero-form">
+
+
+
+
+
+			<div class="btn-group">
+	      <button id="year-btn" type="input" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> year <span class="caret"></span>
+				</button>
+	      <ul id="year-list" class="dropdown-menu" role="menu">
+	        <li><a class="dropdown-item" href="#" value="2019">2019</a></li>
+	        <li><a class="dropdown-item" href="#" value="2018">2018</a></li>
+	        <li><a class="dropdown-item" href="#" value="2017">2017</a></li>
+	        <li class="dropdown-divider"></li>
+	        <li><a class="dropdown-item" href="#">다른 메뉴 </a></li>
+	      </ul>
+	    </div>
+
+			<div class="btn-group">
+	      <button id="month-btn" type="submit" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> month <span class="caret"></span>
+	      </button>
+	      <ul id="month-list" class="dropdown-menu" role="menu">
+	        <li><a class="dropdown-item" href="#">7</a></li>
+	        <li><a class="dropdown-item" href="#">6</a></li>
+	        <li><a class="dropdown-item" href="#">5</a></li>
+	        <li class="dropdown-divider"></li>
+	        <li><a class="dropdown-item" href="#">다른 메뉴 </a></li>
+	      </ul>
+	    </div>
+
+
+			<div class="btn-group">
+	      <button id="day-btn" type="submit" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> day <span class="caret"></span>
+	      </button>
+	      <ul id="day-list" class="dropdown-menu" role="menu">
+	        <li><a class="dropdown-item" href="#">25</a></li>
+	        <li><a class="dropdown-item" href="#">24</a></li>
+	        <li><a class="dropdown-item" href="#">23</a></li>
+	        <li class="dropdown-divider"></li>
+	        <li><a class="dropdown-item" href="#">다른 메뉴 </a></li>
+	      </ul>
+	    </div>
+
+			<div class="btn-group">
+	      <button id="country-btn" type="submit" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> country <span class="caret"></span>
+	      </button>
+	      <ul id="country-list" class="dropdown-menu" role="menu">
+	        <li><a class="dropdown-item" href="#">미국</a></li>
+	        <li><a class="dropdown-item" href="#">독일</a></li>
+	        <li class="dropdown-divider"></li>
+	        <li><a class="dropdown-item" href="#">다른 메뉴 </a></li>
+	      </ul>
+	    </div>
+
+			<div class="city-group">
+	      <button id="city-btn" type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown"> city <span class="caret"></span>
+	      </button>
+	      <ul id="city-list" class="dropdown-menu" role="menu">
+
+	        <li><a class="dropdown-item" href="javascript:void(0);" onclick="go(this);" attr-a="onclick : 뉴욕">뉴욕</a></li>
+	        <li><a class="dropdown-item" href="#">괌</a></li>
+	        <li><a class="dropdown-item" href="#">라이프치히</a></li>
+					<li><a class="dropdown-item" href="#">뭰헨</a></li>
+	        <li class="dropdown-divider"></li>
+	        <li><a class="dropdown-item" href="#">다른 메뉴 </a></li>
+	      </ul>
+	    </div>
+
+		</div>
+	</div>
+	<!--
+	<div><input type="button"
+	                    onclick="document.getElementById('frm').submit();"
+	                    value="전송">
+										-->
+
+
+
+	<div class="welcome-hero-serch">
+		<button class="welcome-hero-btn" type="input" onclick="window.location.href='http://localhost:8080/weather/api'">
+			 search  <i data-feather="search"></i>
+		</button>
+	</div>
+
+</div>
+
+<script>
+	function go(obj){
+
+		console.log($(obj).attr('obj'));
+
+
+	}
+</script>
+
+
+
+<script>
+$('#year-list li > a' ).on('click', function() {
+	// 버튼에 선택된 항목 텍스트 넣기
+	$('#year-btn').text($(this).text());
+	// 선택된 항목 값(value) 얻기
+	submit($(this).attr('value'));
+});
+$('#month-list li > a').on('click', function() {
+	// 버튼에 선택된 항목 텍스트 넣기
+	$('#month-btn').text($(this).text());
+	// 선택된 항목 값(value) 얻기
+	// alert($(this).attr('value'));
+});
+$('#day-list li > a').on('click', function() {
+	// 버튼에 선택된 항목 텍스트 넣기
+	$('#day-btn').text($(this).text());
+	// 선택된 항목 값(value) 얻기
+	// alert($(this).attr('value'));
+});
+$('#country-list li > a').on('click', function() {
+	// 버튼에 선택된 항목 텍스트 넣기
+	$('#country-btn').text($(this).text());
+	// 선택된 항목 값(value) 얻기
+	// alert($(this).attr('value'));
+});
+
+
+
+
+$('#city-list li > a').on('click', function() {
+	// 버튼에 선택된 항목 텍스트 넣기
+	$('#city-btn').text($(this).text());
+	// 선택된 항목 값(value) 얻기
+	// alert($(this).attr('value'));
+});
+</script>
+
+<!---------------------------------------------->
+
+				<nav>
+					<ul>
+						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+						<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<span class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>.</span>
+			</footer>
+
+		</div>
+	</div>
+	<script>
+		window.onload = function() {
+			document.body.classList.remove('is-preload');
+		}
+		window.ontouchmove = function() {
+			return false;
+		}
+		window.onorientationchange = function() {
+			document.body.scrollTop = 0;
+		}
+	</script>
+</body>
+
+</html>

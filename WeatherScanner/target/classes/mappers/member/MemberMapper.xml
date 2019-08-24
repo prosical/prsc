@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper
+	namespace="com.spring.weather.member.repository.IMemberDAO">
+
+	<!-- MemberResultMap 설정 -->
+	<resultMap type="com.spring.weather.member.model.MemberVO"
+		id="MemberResultMap">
+		<id property="memberId" column="member_id" />
+		<result property="memberPw" column="member_pw" />
+		<result property="email" column="email" />
+		<result property="nickname" column="nickname" />
+		<result property="regDate" column="reg_date" />
+		<result property="sessionId" column="session_id" />
+		<result property="sessionLimit" column="session_limit" />
+	</resultMap>
+
+	<!-- 회원 등록 SQL -->
+	<insert id="register">
+		INSERT INTO member
+		(member_id, member_pw, nickname,
+		email)
+		VALUES (#{memberId}, #{memberPw}, #{nickname}, #{email})
+	</insert>
+
+	<!-- 아이디 중복확인 SQL -->
+	<select id="isDuplicateId" resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE member_id=#{memberId}
+	</select>
+
+	<!-- 로그인 처리 SQL -->
+	<select id="login" resultMap="MemberResultMap">
+		SELECT *
+		FROM member
+		WHERE
+		member_id=#{memberId}
+	</select>
+
+	<select id="getMemberList" resultMap="MemberResultMap">
+		SELECT member_id, nickname,
+		email, reg_date FROM member
+	</select>
+
+	<select id="getMemberInfo" resultMap="MemberResultMap">
+		SELECT member_id, nickname,
+		email, reg_date FROM member where member_id = #{memberId}
+	</select>
+
+	<!-- 회원정보 수정 -->
+	<update id="update">
+		UPDATE member
+		SET nickname = #{nickname}, member_pw
+		=#{memberPw}
+		WHERE member_id = #{memberId}
+	</update>
+
+	<!-- 회원탈퇴 -->
+	<delete id="delete">
+		DELETE FROM member WHERE member_id = #{member_id}
+	</delete>
+
+	<!-- 자동 로그인을 체크할 경우 세션아이디와 로그인 유지시간을 갱신 -->
+	<update id="keepLogin">
+		UPDATE member
+		SET session_id=#{sessionId},
+		session_limit=#{sessionLimit}
+		WHERE member_id=#{memberId}
+	</update>
+
+	<!-- 자동로그인을 사용한 방문자가 재방문했을 시 로그인 쿠키의 세션아이디와 일치하는 회원의 정보를 불러옴 -->
+	<select id="getMemberWithSessionId" resultMap="MemberResultMap">
+		SELECT * FROM
+		member
+		WHERE session_id=#{sessionId}
+	</select>
+
+
+</mapper>

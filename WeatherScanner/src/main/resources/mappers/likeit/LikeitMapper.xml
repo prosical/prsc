@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.spring.weather.likeit.repository.ILikeitDAO">
+	
+	<!--  DB컬럼과 VO필드명이 다른 경우 처리 방법 -->
+	<resultMap id="LikeitResultMap" type="com.spring.weather.likeit.model.LikeitVO">
+		<id property="likeNo" column="like_no"  />
+		<result property="boardNo" column="board_no"  />
+		<result property="memberId" column="member_id" />
+		<result property="likeCnt" column="like_cnt" />
+	</resultMap>
+	
+	<insert id="insertLike">
+		INSERT INTO likeit (board_no, member_id, like_cnt) 
+		VALUES (#{boardNo}, #{memberId}, #{likeCnt})
+	</insert>
+	
+	<delete id="deleteLike">
+		DELETE FROM likeit WHERE member_id = #{memberId} and board_no = #{boardNo}
+	</delete>
+	
+	<select id="isDuplicate" resultType="int">
+		SELECT COUNT(*) FROM likeit where board_no = #{boardNo} and member_id = #{memberId}
+	</select>
+	
+	<select id="selectAllArticles" resultMap="LikeitResultMap">
+		SELECT * FROM likeit WHERE member_id = #{memberId}
+	</select>
+	
+	<select id="pluslikeCnt">
+		UPDATE likeit SET like_cnt = like_cnt+1 WHERE board_no = #{boardNo}
+	</select>
+	
+	<select id="minuslikeCnt">
+		UPDATE likeit SET like_cnt = like_cnt-1 WHERE board_no = #{boardNo}
+	</select>
+	
+	<select id="countLike" resultType="int">
+		SELECT COUNT(like_cnt) from likeit WHERE board_no = #{boardNo}
+	</select>
+	
+	<delete id="deleteAll">
+		DELETE from likeit WHERE member_id = #{memberId}
+	</delete>
+	
+	<delete id="deleteAllNo">
+		DELETE from likeit WHERE board_no = #{boardNo}
+	</delete>
+	
+</mapper>

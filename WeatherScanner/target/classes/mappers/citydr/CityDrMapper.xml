@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.spring.weather.citydr.repository.ICityDrDAO">
+	
+	<!--  DB컬럼과 VO필드명이 다른 경우 처리 방법 -->
+	<resultMap id="CityDrResultMap" type="com.spring.weather.citydr.model.CityDrVO">
+		<id property="cityName" column="city_name"  />
+		<result property="cityInfo" column="city_info" />
+		<result property='cityDryStart' column="city_dry_start"/>
+		<result property='cityDryEnd' column="city_dry_end"/>
+		<result property='cityRainStart' column="city_rain_start"/>
+		<result property='cityRainEnd' column="city_rain_end"/>
+		<result property='rcmdMonStart' column="rcmd_mon_start"/>
+		<result property='rcmdMonEnd' column="rcmd_mon_end"/>
+	</resultMap>
+	
+		<resultMap id="BoardResultMap" type="com.spring.weather.board.model.BoardVO">
+		<id property="boardNo" column="board_no"  />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="nickname" column="nickname" />
+		<result property="regDate" column="reg_date" />
+		<result property="viewCnt" column="view_cnt" />
+		<result property="replyCnt" column="reply_cnt" />
+		<result property="addFile" column="add_file" />
+		<result property="likeCnt" column="like_cnt" />
+	</resultMap>
+	
+	<insert id="insertCity">
+		INSERT INTO city_dr (city_name, city_info) VALUES (#{cityName}, #{cityInfo})
+	</insert>
+	
+	<update id="updateCity">
+		UPDATE city_dr SET city_info = #{cityInfo} WHERE city_name = #{cityName} 
+	</update>
+	
+	<select id="CityInfo" resultMap="CityDrResultMap">
+		SELECT * FROM city_dr WHERE city_name = #{cityName}
+	</select>
+	
+	<delete id="deleteCity">
+		DELETE FROM city_dr WHERE city_name = #{cityName}
+	</delete>
+	
+	<select id="getCityReview" resultMap="BoardResultMap">
+		SELECT * from review_board WHERE title LIKE CONCAT('%', #{cityName}, '%') ORDER BY rand() limit 3
+	</select>
+</mapper>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- mvc 설정과 관련된 여러 처리를 담당하는 설정파일(ex: DB, service....) -->
+	
+	<!-- properties 파일 로딩하기 -->
+	<context:property-placeholder location="classpath:/database/jdbc.properties"/>
+	
+
+	<!-- DB관련 설정 -->	
+	<!-- DB관련 정보를 커넥션 풀 객체에 담는 설정 -->
+	
+	<!-- HikariConfig 빈 등록 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 위에 4개는 필수 밑에는 선택 -->
+		<property name="maximumPoolSize" value="30" />
+	</bean>
+	
+	<!--  DataSource 등록 -->
+	<bean id="ds" class ="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg ref="hikariConfig" />
+	</bean>	
+	
+	<!-- mybatis 주요 객체  sesstionFactory클래스 빈 등록 -->
+	<bean id="sqlSesstionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"	>
+		<property name="dataSource" ref="ds"/>
+		<property name="configLocation" value="classpath:/spring/mybatis-config.xml" />
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />
+	</bean>
+	
+	<!-- 마이바티스를 쉽게 사용할 템틀릿 클래스 빈 등록 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg ref="sqlSesstionFactory" />
+	</bean>
+	
+	<!-- xml파일을 빈객체로 등록하는 설정 -->
+	<mybatis-spring:scan base-package="com.spring.weather.member.repository" />	
+	<!-- <mybatis-spring:scan base-package="com.spring.weather.mypage.repository" /> -->
+	<mybatis-spring:scan base-package="com.spring.weather.reply.repository" />
+	<mybatis-spring:scan base-package="com.spring.weather.location.repository" />
+	<mybatis-spring:scan base-package="com.spring.weather.citydr.repository" />
+	<mybatis-spring:scan base-package="com.spring.weather.likeit.repository" />
+	<mybatis-spring:scan base-package="com.spring.weather.addfile.repository" />
+	<mybatis-spring:scan base-package="com.spring.weather.api.repository" />
+	
+	<!-- 트랜잭션 매니저 빈 등록 -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds" />
+	</bean>
+	
+	<!-- 파일 업로드 라이브러리 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>50000000</value>
+		</property>
+	</bean>
+	
+	<!--  컴포넌트 자동 스캔 명령  -->
+	<context:component-scan base-package="com.spring.weather" />
+	
+	
+	
+	
+</beans>

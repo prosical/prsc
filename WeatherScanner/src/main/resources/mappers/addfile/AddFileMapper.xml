@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.spring.weather.addfile.repository.IAddFileDAO">
+	
+	<!--  DB컬럼과 VO필드명이 다른 경우 처리 방법 -->
+	<resultMap id="AddBoardResultMap" type="com.spring.weather.addfile.model.AddFileVO">
+		<id property="fileNo" column="file_no"  />
+		<result property="boardNo" column="board_no"  />
+		<result property="fileName" column="file_name"  />
+		<result property="fileSize" column="file_size"  />
+		<result property="fileContentType" column="file_content_type"  />
+		<result property="fileData" column="file_data"  />
+	</resultMap>
+	
+	<insert id="insertFile">
+		INSERT INTO add_file (file_no, board_no, file_name, file_size, file_content_type,file_data) 
+		VALUES (#{fileNo}, #{boardNo}, #{fileName}, #{fileSize}, #{fileContentType},#{fileData})
+	</insert>
+	
+	<delete id="deleteFile">
+		delete from add_file where file_no = #{fileNo}
+	</delete>
+	<delete id="deleteFileAll">
+		delete from add_file where board_no = #{boardNo}
+	</delete>
+	
+	<select id="selectMaxArticleNo" resultType="int">
+		SELECT Max(board_no) from review_board 
+	</select>
+	
+	<select id="countFile" resultType="int">
+		SELECT count(*) from add_file where board_no = #{boardNo};
+	</select>
+	
+	<select id="selectFile" resultMap="AddBoardResultMap">
+		select * from add_file where board_no = #{boardNo}
+	</select>
+</mapper>
